@@ -8,12 +8,37 @@ void calc(g4m::dataStruct &it, g4m::incrementTab &fi, g4m::ageStruct &cohort, g4
  {
 //  decision.setYear(year);
 //MG: setup forest Age
+//******************************************************************************
+if (year >= 1991) {
+  cout << asID << endl;
+  if (asID >= 63) {
+    cout << "1" << endl;
+    system("pause");
+  }
+}
+//******************************************************************************
   int Age = year-byear;
   int xi = (it.x);
   int yi = (it.y);
   int Country = (int)it.COUNTRY[2000];
 // --------------Applying FM policy -----------------------------------
+//******************************************************************************
+if (year >= 1991) {
+  if (asID >= 63) {
+    cout << "2 before get: " << xi << "\t" << yi << endl;
+    system("pause");
+  }
+}
+//******************************************************************************
   int rotationTimeCurr = rotationForest.get(xi,yi);
+//******************************************************************************
+if (year >= 1991) {
+  if (asID >= 63) {
+    cout << "3 after get" << endl;
+    system("pause");
+  }
+}
+//******************************************************************************
 //  cohort.setRotPeriod(rotationTimeCurr);       
 //  cohort.setStockingdegree(thinningForest.get(xi,yi));
 //  newCohort.setRotPeriod(rotationForestNew.get(xi,yi));       
@@ -39,8 +64,40 @@ int fl = 0;
 //if (asID > 14) fl = 1;
 //  g4m::ageStruct::v res = cohort.aging1(fl); //MG
 //if (asID > 13) {cohort.prn(); system("pause");}
+//******************************************************************************
+if (year >= 1991) {
+  if (asID >= 63) {
+    cout << "4 B4 aging" << endl;
+    system("pause");
+  }
+}
+//******************************************************************************
   g4m::ageStruct::v res = cohort.aging(); //MG
+//******************************************************************************
+if (year >= 1991) {
+  if (asID >= 63) {
+    cout << "5 after aging" << endl;
+    system("pause");
+  }
+}
+//******************************************************************************
   g4m::ageStruct::v newRes = newCohort.aging();
+//******************************************************************************
+//******************************************************************************
+if (year >= 1991) {
+  if (asID >= 63) {
+    cout << "6 after aging" << endl;
+    system("pause");
+  }
+}
+//******************************************************************************
+if (year >= 1991) {
+  if (asID >= 63) {
+    cout << "2" << endl;
+    system("pause");
+  }
+}
+//******************************************************************************
   map<string, interpol> data;
   fillContainer(it,data);     
   double sawnW = 0.;
@@ -209,8 +266,6 @@ double harvMAI = maiForest.get(xi,yi)*data["FTIMBER"].v()*(1-coeff.HarvLoos.v())
                , harvMAI);
 
 
-  
-               
   double EmissionsCur=0.;
   double EmissionsProductCur= 0.;  
   double EmissionsLitterCur = 0.;  
@@ -303,7 +358,6 @@ double harvMAI = maiForest.get(xi,yi)*data["FTIMBER"].v()*(1-coeff.HarvLoos.v())
     }
 //cout<<"defshare= "<<defShare<<"\t affShare= "<<affShare<<endl;
 
-
 // MG: End of gdp definition
   double defIncome = 0.;
 //Pay if Carbon get's to air (Harvest goes to products)
@@ -382,8 +436,6 @@ system("pause");
     OforestShare = singleCell.OforestShare;
     AforestShare = 0.;  
     }
-
- 
   res = cohort.deforest(singleCell.deforestA[Age],0); //MG: deforest set forest and get deforested biomass. Devide by refForShare to get per ha value
   double defBiomass = (res.enSw + res.enRw + res.vnSw + res.vnRw);///deforestA[Age]; // deforested biomass per ha
   singleCell.OforestShare = OforestShare;
