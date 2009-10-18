@@ -23,6 +23,8 @@
 #include "griddata2.h"                     // data of any type on x-y grid by Andriy Bun
 #include "fillContainer.cpp"
 
+//#include "countryData.h"
+//#include "countryData_MG1.h"                   // data by countries
 #include "countryData.h"                   // data by countries with Poles regions and printToFile
 
 #include "forest_MG.h"                     // definitions
@@ -30,7 +32,7 @@
 #include "MAI_country.cpp"
 #include "hurdle_and_deforaffor_annex1_FM.h"
 #include "readInput_MG.cpp"                // code for reading from files
-#include "forestCalculations_MG.cpp"       // code for calculations
+//#include "forestCalculations_MG.cpp"       // code for calculations
 #include "initManagedForest4.cpp"
 #include "calc.cpp"
 #include "woodHarvestStatCountry.cpp" // FAO stat on wood harvest by countries
@@ -49,11 +51,42 @@ int main ()
   set<int> years;
   years.insert(2000);
   years.insert(2005);
-//  years.insert(2010);
-//  years.insert(2020);
-//  years.insert(2030);
-//  years.insert(2040);
-//  years.insert(2050);
+  years.insert(2010);
+  years.insert(2020);
+  years.insert(2030);
+  years.insert(2040);
+  years.insert(2050);
+
+// Setting regions for calculations:
+  regions.insert(1);
+  regions.insert(3);  
+  regions.insert(5);  
+  regions.insert(6);
+  regions.insert(7);  
+  regions.insert(8);  
+  regions.insert(9);
+  regions.insert(10);  
+  regions.insert(12);  
+  regions.insert(18);
+  regions.insert(27);  
+
+//  regions.insert(2);
+//  regions.insert(4);  
+//  regions.insert(11);  
+//  regions.insert(13);  
+//  regions.insert(14);  
+//  regions.insert(15);  
+//  regions.insert(16);  
+//  regions.insert(17);  
+//  regions.insert(19);  
+//  regions.insert(20);  
+//  regions.insert(21);  
+//  regions.insert(22);  
+//  regions.insert(23);  
+//  regions.insert(24);  
+//  regions.insert(25);  
+//  regions.insert(26);  
+   
 //*******************************
 //** Reading coefficients file **
 //*******************************
@@ -122,12 +155,16 @@ cout << "Price C value " << i << endl;
 //      decision.setYear(year);
       int Age = year-byear;
       if (year > byear)
-       {adjustManagedForest(plots, fi, cohort_all, 
+       {
+cout << "Adjusting FM .."<< endl;
+       adjustManagedForest(plots, fi, cohort_all, 
               newCohort_all, dat_all, maiForest, 
               thinningForest, rotationForest, managedForest,
               rotationForestNew, thinningForestNew,
               rotationType, harvestGrid, year);
+cout << "finished Adjusting FM .."<< endl;
        }
+
 
 //************************************
 //** processing data from all plots **
@@ -135,53 +172,16 @@ cout << "Price C value " << i << endl;
       dataDetStruct::iterator it = plots.begin();
       while (it != plots.end()) {
         if (it->PROTECT[2000]==0) {
-      if (  
-            (it->COUNTRY[2000] == 10) 
-          || (it->COUNTRY[2000] == 11)
-          || (it->COUNTRY[2000] == 17)          
-          || (it->COUNTRY[2000] == 25)
-          || (it->COUNTRY[2000] == 27)
-          || (it->COUNTRY[2000] == 30)
-          || (it->COUNTRY[2000] == 33)        
-          || (it->COUNTRY[2000] == 43)  
-          || (it->COUNTRY[2000] == 46)    
-          || (it->COUNTRY[2000] == 47)  
-          || (it->COUNTRY[2000] == 56)                        
-          || (it->COUNTRY[2000] == 61)
-          || (it->COUNTRY[2000] == 62)
-          || (it->COUNTRY[2000] == 69) 
-          || (it->COUNTRY[2000] == 71) 
-          || (it->COUNTRY[2000] == 82)    
-          || (it->COUNTRY[2000] == 83)   
-          || (it->COUNTRY[2000] == 89)  
-          || (it->COUNTRY[2000] == 92)    
-          || (it->COUNTRY[2000] == 96)   
-          || (it->COUNTRY[2000] == 107) 
-          || (it->COUNTRY[2000] == 112)    
-          || (it->COUNTRY[2000] == 113)
-          || (it->COUNTRY[2000] == 114)          
-          || (it->COUNTRY[2000] == 128)          
-          || (it->COUNTRY[2000] == 135)           
-          || (it->COUNTRY[2000] == 137)            
-          || (it->COUNTRY[2000] == 142)    
-          || (it->COUNTRY[2000] == 150)   
-          || (it->COUNTRY[2000] == 151) 
-          || (it->COUNTRY[2000] == 155)                                                                                                             
-          || (it->COUNTRY[2000] == 156)             
-          || (it->COUNTRY[2000] == 165) 
-          || (it->COUNTRY[2000] == 166)       
-          || (it->COUNTRY[2000] == 170)                         
-          || (it->COUNTRY[2000] == 179) 
-          || (it->COUNTRY[2000] == 180) 
-          || (it->COUNTRY[2000] == 190)        
-          || (it->COUNTRY[2000] == 194)    
-          || (it->COUNTRY[2000] == 196)                                               
-          || (it->COUNTRY[2000] == 197) ) { // Test only some countries
-
+      if (regions.find(it->POLESREG[2000]) != regions.end()) { // Test only some regions
             int asID = it->asID;
-            calc(*it, fi, cohort_all[asID], newCohort_all[asID], dat_all[asID], managedForest,
+//if (year > byear) cout << "start Calc"<< endl;
+//if ((cohort_all[asID].getArea(0) == 0.)||(cohort_all[asID].getArea(0) >= 1./500.))
+{
+            calc(*it, fi, *cohort_all[asID], *newCohort_all[asID], dat_all[asID], managedForest,
                  maiForest, rotationForest, rotationForestNew, thinningForest, thinningForestNew, 
                  harvestGrid,year, i, asID);
+}                 
+//if (year > byear) cout<< "finished Calc"<<endl;                 
           }                        // End if Country ...
         }                          // End if not protected
         it++;

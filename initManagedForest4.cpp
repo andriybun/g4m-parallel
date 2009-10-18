@@ -35,49 +35,51 @@ void initManagedForest(dataDetStruct &data_all, g4m::incrementTab &fi, datGlobal
 
   dataDetStruct::iterator iter = data_all.begin();
   while (iter != data_all.end()) {
+   if (regions.find(iter->POLESREG[2000]) != regions.end()) { // Test only some regions
     if (iter->PROTECT[2000] == 0) {
-      if (  
-            (iter->COUNTRY[2000] == 10) 
-          || (iter->COUNTRY[2000] == 11)
-          || (iter->COUNTRY[2000] == 17)          
-          || (iter->COUNTRY[2000] == 25)
-          || (iter->COUNTRY[2000] == 27)
-          || (iter->COUNTRY[2000] == 30)
-          || (iter->COUNTRY[2000] == 33)        
-          || (iter->COUNTRY[2000] == 43)  
-          || (iter->COUNTRY[2000] == 46)    
-          || (iter->COUNTRY[2000] == 47)  
-          || (iter->COUNTRY[2000] == 56)                        
-          || (iter->COUNTRY[2000] == 61)
-          || (iter->COUNTRY[2000] == 62)
-          || (iter->COUNTRY[2000] == 69) 
-          || (iter->COUNTRY[2000] == 71) 
-          || (iter->COUNTRY[2000] == 82)    
-          || (iter->COUNTRY[2000] == 83)   
-          || (iter->COUNTRY[2000] == 89)  
-          || (iter->COUNTRY[2000] == 92)    
-          || (iter->COUNTRY[2000] == 96)   
-          || (iter->COUNTRY[2000] == 107) 
-          || (iter->COUNTRY[2000] == 112)    
-          || (iter->COUNTRY[2000] == 113)
-          || (iter->COUNTRY[2000] == 114)          
-          || (iter->COUNTRY[2000] == 128)          
-          || (iter->COUNTRY[2000] == 135)           
-          || (iter->COUNTRY[2000] == 137)            
-          || (iter->COUNTRY[2000] == 142)    
-          || (iter->COUNTRY[2000] == 150)   
-          || (iter->COUNTRY[2000] == 151) 
-          || (iter->COUNTRY[2000] == 155)                                                                                                             
-          || (iter->COUNTRY[2000] == 156)             
-          || (iter->COUNTRY[2000] == 165) 
-          || (iter->COUNTRY[2000] == 166)       
-          || (iter->COUNTRY[2000] == 170)                         
-          || (iter->COUNTRY[2000] == 179) 
-          || (iter->COUNTRY[2000] == 180) 
-          || (iter->COUNTRY[2000] == 190)        
-          || (iter->COUNTRY[2000] == 194)    
-          || (iter->COUNTRY[2000] == 196)                                               
-          || (iter->COUNTRY[2000] == 197) ) { // Test only some countries
+//      if (  
+//            (iter->COUNTRY[2000] == 10) 
+//          || (iter->COUNTRY[2000] == 11)
+//          || (iter->COUNTRY[2000] == 17)          
+//          || (iter->COUNTRY[2000] == 25)
+//          || (iter->COUNTRY[2000] == 27)
+//          || (iter->COUNTRY[2000] == 30)
+//          || (iter->COUNTRY[2000] == 33)        
+//          || (iter->COUNTRY[2000] == 43)  
+//          || (iter->COUNTRY[2000] == 46)    
+//          || (iter->COUNTRY[2000] == 47)  
+//          || (iter->COUNTRY[2000] == 56)                        
+//          || (iter->COUNTRY[2000] == 61)
+//          || (iter->COUNTRY[2000] == 62)
+//          || (iter->COUNTRY[2000] == 69) 
+//          || (iter->COUNTRY[2000] == 71) 
+//          || (iter->COUNTRY[2000] == 82)    
+//          || (iter->COUNTRY[2000] == 83)   
+//          || (iter->COUNTRY[2000] == 89)  
+//          || (iter->COUNTRY[2000] == 92)    
+//          || (iter->COUNTRY[2000] == 96)   
+//          || (iter->COUNTRY[2000] == 107) 
+//          || (iter->COUNTRY[2000] == 112)    
+//          || (iter->COUNTRY[2000] == 113)
+//          || (iter->COUNTRY[2000] == 114)          
+//          || (iter->COUNTRY[2000] == 128)          
+//          || (iter->COUNTRY[2000] == 135)           
+//          || (iter->COUNTRY[2000] == 137)            
+//          || (iter->COUNTRY[2000] == 142)    
+//          || (iter->COUNTRY[2000] == 150)   
+//          || (iter->COUNTRY[2000] == 151) 
+//          || (iter->COUNTRY[2000] == 155)                                                                                                             
+//          || (iter->COUNTRY[2000] == 156)             
+//          || (iter->COUNTRY[2000] == 165) 
+//          || (iter->COUNTRY[2000] == 166)       
+//          || (iter->COUNTRY[2000] == 170)                         
+//          || (iter->COUNTRY[2000] == 179) 
+//          || (iter->COUNTRY[2000] == 180) 
+//          || (iter->COUNTRY[2000] == 190)        
+//          || (iter->COUNTRY[2000] == 194)    
+//          || (iter->COUNTRY[2000] == 196)                                               
+//          || (iter->COUNTRY[2000] == 197) ) 
+          { // Test only some countries
         map<string, interpol> data;
         fillContainer(*iter,data);     
 //        xi = int((data["X"].v() - 0.25 + 180)*2);
@@ -472,8 +474,9 @@ void initManagedForest(dataDetStruct &data_all, g4m::incrementTab &fi, datGlobal
         rotationForest.set(xi,yi,Rotation);	
       }        // End for COUNTRY test
     }          // End if (iter->PROTECT[2000] == 0)
-    iter++;
-  }            // End while(iter != data_all.end())
+  }// Test only some regions
+  iter++;
+}            // End while(iter != data_all.end())
   cout << "end of first pass" << endl;
 //******************************************************************************
 //**************************Second Pass********************
@@ -481,55 +484,57 @@ void initManagedForest(dataDetStruct &data_all, g4m::incrementTab &fi, datGlobal
 
   iter = data_all.begin();
   while (iter != data_all.end()) {
+   if (regions.find(iter->POLESREG[2000]) != regions.end()) { // Test only some regions        
     int Country0 = 1;
     double HarvestTmp = 0;
     double newHarvestTmp = 0;
     double forestArea0 = 0.;
     double abBiomassO = 0.;  	 
     if (iter->PROTECT[2000]==0) {   // We consider only unprotected land
-      if (  
-            (iter->COUNTRY[2000] == 10) 
-          || (iter->COUNTRY[2000] == 11)
-          || (iter->COUNTRY[2000] == 17)          
-          || (iter->COUNTRY[2000] == 25)
-          || (iter->COUNTRY[2000] == 27)
-          || (iter->COUNTRY[2000] == 30)
-          || (iter->COUNTRY[2000] == 33)        
-          || (iter->COUNTRY[2000] == 43)  
-          || (iter->COUNTRY[2000] == 46)    
-          || (iter->COUNTRY[2000] == 47)  
-          || (iter->COUNTRY[2000] == 56)                        
-          || (iter->COUNTRY[2000] == 61)
-          || (iter->COUNTRY[2000] == 62)
-          || (iter->COUNTRY[2000] == 69) 
-          || (iter->COUNTRY[2000] == 71) 
-          || (iter->COUNTRY[2000] == 82)    
-          || (iter->COUNTRY[2000] == 83)   
-          || (iter->COUNTRY[2000] == 89)  
-          || (iter->COUNTRY[2000] == 92)    
-          || (iter->COUNTRY[2000] == 96)   
-          || (iter->COUNTRY[2000] == 107) 
-          || (iter->COUNTRY[2000] == 112)    
-          || (iter->COUNTRY[2000] == 113)
-          || (iter->COUNTRY[2000] == 114)          
-          || (iter->COUNTRY[2000] == 128)          
-          || (iter->COUNTRY[2000] == 135)           
-          || (iter->COUNTRY[2000] == 137)            
-          || (iter->COUNTRY[2000] == 142)    
-          || (iter->COUNTRY[2000] == 150)   
-          || (iter->COUNTRY[2000] == 151) 
-          || (iter->COUNTRY[2000] == 155)                                                                                                             
-          || (iter->COUNTRY[2000] == 156)             
-          || (iter->COUNTRY[2000] == 165) 
-          || (iter->COUNTRY[2000] == 166)       
-          || (iter->COUNTRY[2000] == 170)                         
-          || (iter->COUNTRY[2000] == 179) 
-          || (iter->COUNTRY[2000] == 180) 
-          || (iter->COUNTRY[2000] == 190)        
-          || (iter->COUNTRY[2000] == 194)    
-          || (iter->COUNTRY[2000] == 196)                                               
-          || (iter->COUNTRY[2000] == 197) ) { // Test only some countries
-        do {
+//      if (  
+//            (iter->COUNTRY[2000] == 10) 
+//          || (iter->COUNTRY[2000] == 11)
+//          || (iter->COUNTRY[2000] == 17)          
+//          || (iter->COUNTRY[2000] == 25)
+//          || (iter->COUNTRY[2000] == 27)
+//          || (iter->COUNTRY[2000] == 30)
+//          || (iter->COUNTRY[2000] == 33)        
+//          || (iter->COUNTRY[2000] == 43)  
+//          || (iter->COUNTRY[2000] == 46)    
+//          || (iter->COUNTRY[2000] == 47)  
+//          || (iter->COUNTRY[2000] == 56)                        
+//          || (iter->COUNTRY[2000] == 61)
+//          || (iter->COUNTRY[2000] == 62)
+//          || (iter->COUNTRY[2000] == 69) 
+//          || (iter->COUNTRY[2000] == 71) 
+//          || (iter->COUNTRY[2000] == 82)    
+//          || (iter->COUNTRY[2000] == 83)   
+//          || (iter->COUNTRY[2000] == 89)  
+//          || (iter->COUNTRY[2000] == 92)    
+//          || (iter->COUNTRY[2000] == 96)   
+//          || (iter->COUNTRY[2000] == 107) 
+//          || (iter->COUNTRY[2000] == 112)    
+//          || (iter->COUNTRY[2000] == 113)
+//          || (iter->COUNTRY[2000] == 114)          
+//          || (iter->COUNTRY[2000] == 128)          
+//          || (iter->COUNTRY[2000] == 135)           
+//          || (iter->COUNTRY[2000] == 137)            
+//          || (iter->COUNTRY[2000] == 142)    
+//          || (iter->COUNTRY[2000] == 150)   
+//          || (iter->COUNTRY[2000] == 151) 
+//          || (iter->COUNTRY[2000] == 155)                                                                                                             
+//          || (iter->COUNTRY[2000] == 156)             
+//          || (iter->COUNTRY[2000] == 165) 
+//          || (iter->COUNTRY[2000] == 166)       
+//          || (iter->COUNTRY[2000] == 170)                         
+//          || (iter->COUNTRY[2000] == 179) 
+//          || (iter->COUNTRY[2000] == 180) 
+//          || (iter->COUNTRY[2000] == 190)        
+//          || (iter->COUNTRY[2000] == 194)    
+//          || (iter->COUNTRY[2000] == 196)                                               
+//          || (iter->COUNTRY[2000] == 197) ) 
+          { // Test only some countries
+//        do {
           map<string, interpol> data;
           fillContainer(*iter, data);
           int biomasRot=0;  // MG: rotation time fitted to get certain biomass under certain MAI (w/o thinning)
@@ -854,11 +859,13 @@ void initManagedForest(dataDetStruct &data_all, g4m::incrementTab &fi, datGlobal
               }
             }
           }
-          iter++;
-        } while (((iter-1)->COUNTRY[2000]) == ((iter)->COUNTRY[2000]));   // Check are we in the same country  // end for Within current country
+//          iter++;
+//        } while (((iter-1)->COUNTRY[2000]) == ((iter)->COUNTRY[2000]));   // Check are we in the same country  // end for Within current country
 //if (Country0 == 61){cout<<"woodHarvest= "<<woodHarvest[Country0-1]<<"\twoodHarvestStat= "<<woodHarvestStat[Country0-1] <<endl;}
-      } else {iter++;}  // end for Country select
-    } else {iter++;}  // end for IF unprotected
+      } //else {iter++;}  // end for Country select
+    } //else {iter++;}  // end for IF unprotected
+   }   // Test only some regions
+    iter++;
   } //end for WHILE
 //************************End of Second Pass************************************
 
@@ -875,51 +882,52 @@ cout << "end of second pass" << endl;
 
 //cout << "Putting data for current cell into conteiner... "<< endl;
    while (iter != data_all.end())
-   {
+   {if (regions.find(iter->POLESREG[2000]) != regions.end()) { // Test only some regions
 	if (iter->PROTECT[2000] == 0)
-	{
-      if (  
-            (iter->COUNTRY[2000] == 10) 
-          || (iter->COUNTRY[2000] == 11)
-          || (iter->COUNTRY[2000] == 17)          
-          || (iter->COUNTRY[2000] == 25)
-          || (iter->COUNTRY[2000] == 27)
-          || (iter->COUNTRY[2000] == 30)
-          || (iter->COUNTRY[2000] == 33)        
-          || (iter->COUNTRY[2000] == 43)  
-          || (iter->COUNTRY[2000] == 46)    
-          || (iter->COUNTRY[2000] == 47)  
-          || (iter->COUNTRY[2000] == 56)                        
-          || (iter->COUNTRY[2000] == 61)
-          || (iter->COUNTRY[2000] == 62)
-          || (iter->COUNTRY[2000] == 69) 
-          || (iter->COUNTRY[2000] == 71) 
-          || (iter->COUNTRY[2000] == 82)    
-          || (iter->COUNTRY[2000] == 83)   
-          || (iter->COUNTRY[2000] == 89)  
-          || (iter->COUNTRY[2000] == 92)    
-          || (iter->COUNTRY[2000] == 96)   
-          || (iter->COUNTRY[2000] == 107) 
-          || (iter->COUNTRY[2000] == 112)    
-          || (iter->COUNTRY[2000] == 113)
-          || (iter->COUNTRY[2000] == 114)          
-          || (iter->COUNTRY[2000] == 128)          
-          || (iter->COUNTRY[2000] == 135)           
-          || (iter->COUNTRY[2000] == 137)            
-          || (iter->COUNTRY[2000] == 142)    
-          || (iter->COUNTRY[2000] == 150)   
-          || (iter->COUNTRY[2000] == 151) 
-          || (iter->COUNTRY[2000] == 155)                                                                                                             
-          || (iter->COUNTRY[2000] == 156)             
-          || (iter->COUNTRY[2000] == 165) 
-          || (iter->COUNTRY[2000] == 166)       
-          || (iter->COUNTRY[2000] == 170)                         
-          || (iter->COUNTRY[2000] == 179) 
-          || (iter->COUNTRY[2000] == 180) 
-          || (iter->COUNTRY[2000] == 190)        
-          || (iter->COUNTRY[2000] == 194)    
-          || (iter->COUNTRY[2000] == 196)                                               
-          || (iter->COUNTRY[2000] == 197) ) { // Test only some countries
+	 {
+//      if (  
+//            (iter->COUNTRY[2000] == 10) 
+//          || (iter->COUNTRY[2000] == 11)
+//          || (iter->COUNTRY[2000] == 17)          
+//          || (iter->COUNTRY[2000] == 25)
+//          || (iter->COUNTRY[2000] == 27)
+//          || (iter->COUNTRY[2000] == 30)
+//          || (iter->COUNTRY[2000] == 33)        
+//          || (iter->COUNTRY[2000] == 43)  
+//          || (iter->COUNTRY[2000] == 46)    
+//          || (iter->COUNTRY[2000] == 47)  
+//          || (iter->COUNTRY[2000] == 56)                        
+//          || (iter->COUNTRY[2000] == 61)
+//          || (iter->COUNTRY[2000] == 62)
+//          || (iter->COUNTRY[2000] == 69) 
+//          || (iter->COUNTRY[2000] == 71) 
+//          || (iter->COUNTRY[2000] == 82)    
+//          || (iter->COUNTRY[2000] == 83)   
+//          || (iter->COUNTRY[2000] == 89)  
+//          || (iter->COUNTRY[2000] == 92)    
+//          || (iter->COUNTRY[2000] == 96)   
+//          || (iter->COUNTRY[2000] == 107) 
+//          || (iter->COUNTRY[2000] == 112)    
+//          || (iter->COUNTRY[2000] == 113)
+//          || (iter->COUNTRY[2000] == 114)          
+//          || (iter->COUNTRY[2000] == 128)          
+//          || (iter->COUNTRY[2000] == 135)           
+//          || (iter->COUNTRY[2000] == 137)            
+//          || (iter->COUNTRY[2000] == 142)    
+//          || (iter->COUNTRY[2000] == 150)   
+//          || (iter->COUNTRY[2000] == 151) 
+//          || (iter->COUNTRY[2000] == 155)                                                                                                             
+//          || (iter->COUNTRY[2000] == 156)             
+//          || (iter->COUNTRY[2000] == 165) 
+//          || (iter->COUNTRY[2000] == 166)       
+//          || (iter->COUNTRY[2000] == 170)                         
+//          || (iter->COUNTRY[2000] == 179) 
+//          || (iter->COUNTRY[2000] == 180) 
+//          || (iter->COUNTRY[2000] == 190)        
+//          || (iter->COUNTRY[2000] == 194)    
+//          || (iter->COUNTRY[2000] == 196)                                               
+//          || (iter->COUNTRY[2000] == 197) ) 
+          { // Test only some countries
         map<string, interpol> data;
         fillContainer(*iter,data);     
     	   //       xi = int((data["X"].v() - 0.25 + 180)*2);
@@ -1278,8 +1286,9 @@ cout <<endl;
   
     }//END for COUNTRY test
    } //End for PROTECT == 0
+  } // Test only some regions 
 iter++;
-  } // End for WHILE (cell loop) 
+ } // End for WHILE (cell loop) 
 
 //cout << "First pass is finished"<< endl;
 //    int optimUnmanaged = 0;
@@ -1298,9 +1307,9 @@ cout << "Start forth pass" << endl;
 
    iter = data_all.begin();
 
-   while (iter != data_all.end())
-   {
-
+ while (iter != data_all.end())
+ {if (regions.find(iter->POLESREG[2000]) != regions.end()) { // Test only some regions
+ 
   int Country0 = 1;
   double HarvestTmp = 0;
   double newHarvestTmp = 0;
@@ -1316,51 +1325,51 @@ cout << "Start forth pass" << endl;
 
 //cout<<Country0<<endl;       
 //#include "countrySelect.cpp"
-      if (  
-            (iter->COUNTRY[2000] == 10) 
-          || (iter->COUNTRY[2000] == 11)
-          || (iter->COUNTRY[2000] == 17)          
-          || (iter->COUNTRY[2000] == 25)
-          || (iter->COUNTRY[2000] == 27)
-          || (iter->COUNTRY[2000] == 30)
-          || (iter->COUNTRY[2000] == 33)        
-          || (iter->COUNTRY[2000] == 43)  
-          || (iter->COUNTRY[2000] == 46)    
-          || (iter->COUNTRY[2000] == 47)  
-          || (iter->COUNTRY[2000] == 56)                        
-          || (iter->COUNTRY[2000] == 61)
-          || (iter->COUNTRY[2000] == 62)
-          || (iter->COUNTRY[2000] == 69) 
-          || (iter->COUNTRY[2000] == 71) 
-          || (iter->COUNTRY[2000] == 82)    
-          || (iter->COUNTRY[2000] == 83)   
-          || (iter->COUNTRY[2000] == 89)  
-          || (iter->COUNTRY[2000] == 92)    
-          || (iter->COUNTRY[2000] == 96)   
-          || (iter->COUNTRY[2000] == 107) 
-          || (iter->COUNTRY[2000] == 112)    
-          || (iter->COUNTRY[2000] == 113)
-          || (iter->COUNTRY[2000] == 114)          
-          || (iter->COUNTRY[2000] == 128)          
-          || (iter->COUNTRY[2000] == 135)           
-          || (iter->COUNTRY[2000] == 137)            
-          || (iter->COUNTRY[2000] == 142)    
-          || (iter->COUNTRY[2000] == 150)   
-          || (iter->COUNTRY[2000] == 151) 
-          || (iter->COUNTRY[2000] == 155)                                                                                                             
-          || (iter->COUNTRY[2000] == 156)             
-          || (iter->COUNTRY[2000] == 165) 
-          || (iter->COUNTRY[2000] == 166)       
-          || (iter->COUNTRY[2000] == 170)                         
-          || (iter->COUNTRY[2000] == 179) 
-          || (iter->COUNTRY[2000] == 180) 
-          || (iter->COUNTRY[2000] == 190)        
-          || (iter->COUNTRY[2000] == 194)    
-          || (iter->COUNTRY[2000] == 196)                                               
-          || (iter->COUNTRY[2000] == 197) ) { // Test only some countries
+//      if (  
+//            (iter->COUNTRY[2000] == 10) 
+//          || (iter->COUNTRY[2000] == 11)
+//          || (iter->COUNTRY[2000] == 17)          
+//          || (iter->COUNTRY[2000] == 25)
+//          || (iter->COUNTRY[2000] == 27)
+//          || (iter->COUNTRY[2000] == 30)
+//          || (iter->COUNTRY[2000] == 33)        
+//          || (iter->COUNTRY[2000] == 43)  
+//          || (iter->COUNTRY[2000] == 46)    
+//          || (iter->COUNTRY[2000] == 47)  
+//          || (iter->COUNTRY[2000] == 56)                        
+//          || (iter->COUNTRY[2000] == 61)
+//          || (iter->COUNTRY[2000] == 62)
+//          || (iter->COUNTRY[2000] == 69) 
+//          || (iter->COUNTRY[2000] == 71) 
+//          || (iter->COUNTRY[2000] == 82)    
+//          || (iter->COUNTRY[2000] == 83)   
+//          || (iter->COUNTRY[2000] == 89)  
+//          || (iter->COUNTRY[2000] == 92)    
+//          || (iter->COUNTRY[2000] == 96)   
+//          || (iter->COUNTRY[2000] == 107) 
+//          || (iter->COUNTRY[2000] == 112)    
+//          || (iter->COUNTRY[2000] == 113)
+//          || (iter->COUNTRY[2000] == 114)          
+//          || (iter->COUNTRY[2000] == 128)          
+//          || (iter->COUNTRY[2000] == 135)           
+//          || (iter->COUNTRY[2000] == 137)            
+//          || (iter->COUNTRY[2000] == 142)    
+//          || (iter->COUNTRY[2000] == 150)   
+//          || (iter->COUNTRY[2000] == 151) 
+//          || (iter->COUNTRY[2000] == 155)                                                                                                             
+//          || (iter->COUNTRY[2000] == 156)             
+//          || (iter->COUNTRY[2000] == 165) 
+//          || (iter->COUNTRY[2000] == 166)       
+//          || (iter->COUNTRY[2000] == 170)                         
+//          || (iter->COUNTRY[2000] == 179) 
+//          || (iter->COUNTRY[2000] == 180) 
+//          || (iter->COUNTRY[2000] == 190)        
+//          || (iter->COUNTRY[2000] == 194)    
+//          || (iter->COUNTRY[2000] == 196)                                               
+//          || (iter->COUNTRY[2000] == 197) ) 
+          { // Test only some countries
 
- do 
-    {
+// do { 
         map<string, interpol> data;
         fillContainer(*iter,data);        
 
@@ -1692,9 +1701,9 @@ cohort.aging();
 //cout <<sawnW*forestArea0*4<<"\t"<<restW*forestArea0*4;// <<"\t"<<abBiomassO*forestArea0<<"\t";
 //cout << endl;
 
-iter++;
+//iter++;
 //cout<<"iterC="<<((iter-1)->COUNTRY[2000])<<"\t iterC+1="<<((iter)->COUNTRY[2000]) <<endl;
-} while (((iter-1)->COUNTRY[2000]) == ((iter)->COUNTRY[2000]));   // Check are we in the same country  // end for Within current country
+//} while (((iter-1)->COUNTRY[2000]) == ((iter)->COUNTRY[2000]));   // Check are we in the same country  // end for Within current country
 //cout<<"iterS="<<((iter-1)->COUNTRY[2000])<<"\t iterCS+1="<<((iter)->COUNTRY[2000]) <<endl;
 
 //cout<<"x \t"<<xi<<"\t y \t"<<yi<<"\t thinning\t"<<thinningForest.get(xi,yi)<<"\t";
@@ -1703,12 +1712,12 @@ iter++;
 
 //cout <<X<<"\t"<<Y<<"\t"<<Country0<<"\t"<<year<<"\t"
 //if (Country0 == 61) 
-{cout<<"Country= "<<Country0<<"\t woodHarvestFinal= "<<woodHarvest[Country0-1]<<"\t woodHarvestStat= "<<woodHarvestStat[Country0-1] <<endl;}
-} else{iter++;}  // end for Country select
+//{cout<<"Country= "<<Country0<<"\t woodHarvestFinal= "<<woodHarvest[Country0-1]<<"\t woodHarvestStat= "<<woodHarvestStat[Country0-1] <<endl;}
+}// else{iter++;}  // end for Country select
 
-} else{iter++;}  // end for IF unprotected
-   
-
+}// else{iter++;}  // end for IF unprotected
+} // Test only some regions   
+iter++;
 } //end for WHILE
 
 	
@@ -1871,55 +1880,57 @@ void initLoop(int i, dataDetStruct &data_all, g4m::incrementTab &fi, ageStructVe
   int kk=0;
   dataDetStruct::iterator iter = data_all.begin();
   while (iter != data_all.end()) {
+   if (regions.find(iter->POLESREG[2000]) != regions.end()) { // Test only some regions
     if (iter->PROTECT[2000]==0) {
-      if (  
-            (iter->COUNTRY[2000] == 10) 
-          || (iter->COUNTRY[2000] == 11)
-          || (iter->COUNTRY[2000] == 17)          
-          || (iter->COUNTRY[2000] == 25)
-          || (iter->COUNTRY[2000] == 27)
-          || (iter->COUNTRY[2000] == 30)
-          || (iter->COUNTRY[2000] == 33)        
-          || (iter->COUNTRY[2000] == 43)  
-          || (iter->COUNTRY[2000] == 46)    
-          || (iter->COUNTRY[2000] == 47)  
-          || (iter->COUNTRY[2000] == 56)                        
-          || (iter->COUNTRY[2000] == 61)
-          || (iter->COUNTRY[2000] == 62)
-          || (iter->COUNTRY[2000] == 69) 
-          || (iter->COUNTRY[2000] == 71) 
-          || (iter->COUNTRY[2000] == 82)    
-          || (iter->COUNTRY[2000] == 83)   
-          || (iter->COUNTRY[2000] == 89)  
-          || (iter->COUNTRY[2000] == 92)    
-          || (iter->COUNTRY[2000] == 96)   
-          || (iter->COUNTRY[2000] == 107) 
-          || (iter->COUNTRY[2000] == 112)    
-          || (iter->COUNTRY[2000] == 113)
-          || (iter->COUNTRY[2000] == 114)          
-          || (iter->COUNTRY[2000] == 128)          
-          || (iter->COUNTRY[2000] == 135)           
-          || (iter->COUNTRY[2000] == 137)            
-          || (iter->COUNTRY[2000] == 142)    
-          || (iter->COUNTRY[2000] == 150)   
-          || (iter->COUNTRY[2000] == 151) 
-          || (iter->COUNTRY[2000] == 155)                                                                                                             
-          || (iter->COUNTRY[2000] == 156)             
-          || (iter->COUNTRY[2000] == 165) 
-          || (iter->COUNTRY[2000] == 166)       
-          || (iter->COUNTRY[2000] == 170)                         
-          || (iter->COUNTRY[2000] == 179) 
-          || (iter->COUNTRY[2000] == 180) 
-          || (iter->COUNTRY[2000] == 190)        
-          || (iter->COUNTRY[2000] == 194)    
-          || (iter->COUNTRY[2000] == 196)                                               
-          || (iter->COUNTRY[2000] == 197) ) { // Test only some countries
+//      if (  
+//            (iter->COUNTRY[2000] == 10) 
+//          || (iter->COUNTRY[2000] == 11)
+//          || (iter->COUNTRY[2000] == 17)          
+//          || (iter->COUNTRY[2000] == 25)
+//          || (iter->COUNTRY[2000] == 27)
+//          || (iter->COUNTRY[2000] == 30)
+//          || (iter->COUNTRY[2000] == 33)        
+//          || (iter->COUNTRY[2000] == 43)  
+//          || (iter->COUNTRY[2000] == 46)    
+//          || (iter->COUNTRY[2000] == 47)  
+//          || (iter->COUNTRY[2000] == 56)                        
+//          || (iter->COUNTRY[2000] == 61)
+//          || (iter->COUNTRY[2000] == 62)
+//          || (iter->COUNTRY[2000] == 69) 
+//          || (iter->COUNTRY[2000] == 71) 
+//          || (iter->COUNTRY[2000] == 82)    
+//          || (iter->COUNTRY[2000] == 83)   
+//          || (iter->COUNTRY[2000] == 89)  
+//          || (iter->COUNTRY[2000] == 92)    
+//          || (iter->COUNTRY[2000] == 96)   
+//          || (iter->COUNTRY[2000] == 107) 
+//          || (iter->COUNTRY[2000] == 112)    
+//          || (iter->COUNTRY[2000] == 113)
+//          || (iter->COUNTRY[2000] == 114)          
+//          || (iter->COUNTRY[2000] == 128)          
+//          || (iter->COUNTRY[2000] == 135)           
+//          || (iter->COUNTRY[2000] == 137)            
+//          || (iter->COUNTRY[2000] == 142)    
+//          || (iter->COUNTRY[2000] == 150)   
+//          || (iter->COUNTRY[2000] == 151) 
+//          || (iter->COUNTRY[2000] == 155)                                                                                                             
+//          || (iter->COUNTRY[2000] == 156)             
+//          || (iter->COUNTRY[2000] == 165) 
+//          || (iter->COUNTRY[2000] == 166)       
+//          || (iter->COUNTRY[2000] == 170)                         
+//          || (iter->COUNTRY[2000] == 179) 
+//          || (iter->COUNTRY[2000] == 180) 
+//          || (iter->COUNTRY[2000] == 190)        
+//          || (iter->COUNTRY[2000] == 194)    
+//          || (iter->COUNTRY[2000] == 196)                                               
+//          || (iter->COUNTRY[2000] == 197) ) 
+          { // Test only some countries
         map<string, interpol> data;
         fillContainer(*iter,data);
         int xi = (iter->x);
         int yi = (iter->y);
-//        double X = (iter->x)*0.5+0.25-180;
-//        double Y = (iter->y)*0.5+0.25-90;
+        double X = (iter->x)*0.5+0.25-180;
+        double Y = (iter->y)*0.5+0.25-90;
         int Country = (int)data["COUNTRY"].v();
         double LandAreaHa = data["LANDAREA"].v()*100;
         double forestArea0 = LandAreaHa * data["FOREST"].v();
@@ -2105,8 +2116,8 @@ void initLoop(int i, dataDetStruct &data_all, g4m::incrementTab &fi, ageStructVe
         singleCell.prevReportYear = data["BYEAR"].v();
         singleCell.ireportYear=0;
 // saving results to initial vectors
-        cohort_all.push_back(*cohort);
-        newCohort_all.push_back(*newCohort);
+        cohort_all.push_back(cohort);
+        newCohort_all.push_back(newCohort);
         dat_all.push_back(singleCell);
         iter->asID = asID;
         asID++;
@@ -2119,9 +2130,11 @@ void initLoop(int i, dataDetStruct &data_all, g4m::incrementTab &fi, ageStructVe
 ////     CountriesWoodHarvestM3Year.inc(Country,data["BYEAR"].v(),(harvWood*OforestShare+harvWoodNew*singleCell.AforestSharePrev)*singleCell.LandAreaHa);
 //     CountriesWoodLoosCYear.inc(Country,data["BYEAR"].v(),(harvWoodLost*OforestShare+harvWoodLostNew*singleCell.AforestSharePrev)*singleCell.LandAreaHa);
 
-if (asID % 1000 == 0) cout << "asID = " << asID << endl;
+//if (asID % 1000 == 0) cout << "asID = " << asID << endl;
+if (asID >=32765) cout << "asID = " << asID << "\txi= "<<xi<<"\t yi= "<<yi<< "\tx= "<<X<<"\t y= "<<Y<< endl;
       }   // End for Country select
     }     // End for IF unprotected 
+  }      // Test only some regions 
     iter++;
 kk++;
 //if (kk % 100 == 0)

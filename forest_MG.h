@@ -48,7 +48,9 @@ struct dat {
 typedef vector< g4m::ipol<double,double> > cellCol;
 typedef vector<cellCol> dataArray;
 typedef vector<g4m::dataStruct> dataDetStruct;
-typedef vector<g4m::ageStruct> ageStructVector;
+typedef vector<g4m::ageStruct *> ageStructVector;
+//typedef g4m::ageStruct *ageStructPointer;
+//typedef vector<ageStructPointer> ageStructVector;
 typedef vector<dat> datGlobal;
 //******************************************************************************
 // containers of data
@@ -67,6 +69,7 @@ g4m::coeffStruct coeff;
 map<string, interpol> lprice; //datamap for land price corrections for current price  scenario (GLOBIOM)
 map<string, interpol> wprice; //datamap for wood price corrections for current price  scenario (GLOBIOM)
 map<string, interpol> wprod; //datamap for wood production corrections for POLES regions	(GLOBIOM)
+set <int> regions;
 //******************************************************************************
 // constants and variables
 //******************************************************************************
