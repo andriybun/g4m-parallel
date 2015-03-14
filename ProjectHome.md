@@ -1,0 +1,1 @@
+parallel version of g4m model
